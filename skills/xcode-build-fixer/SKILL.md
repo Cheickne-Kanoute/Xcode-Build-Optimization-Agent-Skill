@@ -216,3 +216,35 @@ If during implementation you discover issues outside this skill's scope:
 - For concrete before/after fix patterns, see [references/fix-patterns.md](references/fix-patterns.md)
 - For build settings best practices, see [references/build-settings-best-practices.md](references/build-settings-best-practices.md)
 - For the recommendation format, see [references/recommendation-format.md](references/recommendation-format.md)
+
+## Official sources and keeping this skill current
+
+Official documentation is the source of truth: this skill may lag behind the tools it covers.
+
+**When to check the docs** (not every time):
+- you are unsure about an API, parameter, option or signature;
+- the feature depends on a version (new major release, deprecation, migration);
+- a build or runtime error contradicts this skill;
+- the project uses a newer version than this skill assumes.
+
+Do not re-read the docs for stable things you already know.
+
+**How**: first check the version the project uses (dependency manifest or lockfile), then read the most specific page from the links below (WebFetch, or a documentation MCP if one is available). When a page changed your decision, cite it in your answer.
+
+**If the docs contradict this skill**:
+1. Follow the docs for the current task.
+2. Do not edit this skill yourself.
+3. At the end of the task, report the gap: "Skill `xcode-build-fixer` needs an update: it says X, the docs now say Y (link)", and propose the change.
+4. If the user agrees, the change is made in the source repository `C:\Users\USER\Desktop\Workspace\Mes Projets\Skills\xcode-build-fixer`, then the skill is copied to wherever it is installed (`~/.claude/skills`, `~/.gemini/config/skills`, `~/.gemini/antigravity/skills`) and the repository is pushed to GitHub.
+
+### Official links
+
+- Xcode — Improving the speed of incremental builds: https://developer.apple.com/documentation/xcode/improving-the-speed-of-incremental-builds
+- Xcode — Improving build efficiency with good coding practices: https://developer.apple.com/documentation/xcode/improving-build-efficiency-with-good-coding-practices
+- Xcode — Building your project with explicit module dependencies: https://developer.apple.com/documentation/xcode/building-your-project-with-explicit-module-dependencies
+- Xcode build settings reference: https://developer.apple.com/documentation/xcode/build-settings-reference
+- Xcode release notes: https://developer.apple.com/documentation/xcode-release-notes
+
+The guidance in `references/build-settings-best-practices.md` remains the basis of this skill. For build setting names, defaults and behavior, the Apple documentation and the release notes of the installed Xcode version take precedence.
+
+developer.apple.com pages are rendered with JavaScript and can come back empty when fetched. Use the same path on sosumi.ai (for example `https://sosumi.ai/documentation/swiftui`), or the Sosumi MCP if it is available. For command-line flags, the installed tool's own help is authoritative: `xcodebuild -help`, `xcrun simctl help`, `swiftc -help`.
